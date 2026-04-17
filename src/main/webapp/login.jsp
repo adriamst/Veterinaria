@@ -15,11 +15,12 @@
                 <h2>Panel Administrativo</h2> 
             </div>
             
-            <form method="POST" action="login">
-                <input type="email" name="email" placeholder="Correo">
-                <input type="password" name="password" placeholder="Contraseña">
-                
-               <button type="button" onclick="location.href='panelAdmin.jsp'" style="width: 100%; padding: 10px; background-color: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">Ingresar</button>
+            <form method="POST" action="LoginServlet">
+    <input type="email" name="txtemail" placeholder="Correo" required>
+    <input type="password" name="txtpass" placeholder="Contraseña" required>
+    <button type="submit">Ingresar</button>
+</form>
+               
 
             </form>
         </div>

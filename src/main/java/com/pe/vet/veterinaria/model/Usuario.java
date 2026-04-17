@@ -1,74 +1,36 @@
 package com.pe.vet.veterinaria.model;
 
-
 public class Usuario {
+    private int id;
+    private String correo;
+    private String password;
 
-    
-        private int id;
-        private String nombre;
-        private String correo;
-        private String password;
-        private String rol;
-        
-        
-        
-        public Usuario(int id, String nombre, String correo, String password, String rol) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.password = password;
-        this.rol = rol;
-    }
-
+    // Constructor vacío
     public Usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public String getCorreo() {
+        return correo;
+    }
 
-        public String getNombre() {
-            return nombre;
-        }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getCorreo() {
-            return correo;
-        }
-
-        public void setCorreo(String correo) {
-            this.correo = correo;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getRol() {
-            return rol;
-        }
-
-        public void setRol(String rol) {
-            this.rol = rol;
-        }
-    
-    
-       
-        
-        
-    
-}
+    public void setPassword(String password) {
+        this.password = password;
+    }
+} // <--- Esta llave es la que cierra la clase. Asegúrate de que esté.

@@ -2,53 +2,40 @@ package com.pe.vet.veterinaria.servlet;
 
 import com.pe.vet.veterinaria.dao.UsuarioDAO;
 import com.pe.vet.veterinaria.model.Usuario;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/login")
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-    
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        request.getRequestDispatcher("/WEB-INF/vistas/login.jsp")
-               .forward(request, response);
-    }
 
     @Override
+  
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
         
+        // 1. Recibimos los datos del formulario
+        String email = request.getParameter("txtemail");
+        String password = request.getParameter("txtpass");
 
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
-
-    
+        // 2. Usamos el DAO para validar contra la BD
         UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuario = dao.validarLogin(email, password);
+        Usuario user = dao.validar(email, password);
 
-        if (usuario != null && "ADMIN".equals(usuario.getRol())) {
-
-        HttpSession session = request.getSession();
-        session.setAttribute("usuario", usuario);
-
-        response.sendRedirect("dashboard");
-
+        // 3. Lógica de acceso
+        if (user != null) {
+            // SI DATOS CORRECTOS: Creamos sesión y vamos al panel
+            HttpSession session = request.getSession();
+            session.setAttribute("usuarioLogueado", user);
+            response.sendRedirect("panelAdmin.jsp");
         } else {
-
-        request.setAttribute("error", "Credenciales incorrectas");
-        request.getRequestDispatcher("/WEB-INF/vistas/login.jsp")
-               .forward(request, response);
+            // SI DATOS INCORRECTOS: Enviamos mensaje de error al login
+            request.setAttribute("error", "Correo o contraseña incorrectos");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
-}
 }

@@ -1,49 +1,34 @@
 package com.pe.vet.veterinaria.dao;
-
 import com.pe.vet.veterinaria.model.Usuario;
 import com.pe.vet.veterinaria.util.Conexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import java.sql.*;
 
 public class UsuarioDAO {
+    public Usuario validar(String correo, String password) {
+        Usuario u = null;
+        String sql = "SELECT * FROM usuarios WHERE correo=? AND password=?";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, correo);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
 
-    
-        public Usuario validarLogin (String correo, String password){
-            Usuario usuario = null;
-            
-            try{
-                Connection con = Conexion.getConnection();
-                
-                String sql = "SELECT * FROM usuario WHERE correo =? AND PASSWORD = ?";
-                PreparedStatement ps = con.prepareStatement(sql);
-                
-                
-                ps.setString(1, correo);
-                ps.setString(2, password);
-                
-                ResultSet rs  = ps.executeQuery();
-                
-                if(rs.next()){
-                    usuario = new Usuario();
-                    usuario.setId(rs.getInt("id"));
-                    usuario.setCorreo(rs.getString("correo"));
-                    usuario.setPassword(rs.getString("password"));
-                    usuario.setRol(rs.getString("rol"));                
-                }
-            
-            } catch (Exception e) {
-            e.printStackTrace();
-            
+            if (rs.next()) {
+                u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setCorreo(rs.getString("correo"));
+                u.setPassword(rs.getString("password"));
             }
-        
-        return usuario;
-        
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return u; // Si no lo encuentra, devuelve null
+    }
+}
     
        
         
         
     
-}
+

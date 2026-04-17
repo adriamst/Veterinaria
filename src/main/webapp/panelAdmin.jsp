@@ -4,58 +4,59 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Panel Administrativo - PetSociety</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
         <style>
+            body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+            .welcome-section { text-align: center; margin-top: 50px; }
             .admin-container {
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: center;
                 gap: 20px;
-                padding: 50px;
+                margin-top: 40px;
+                flex-wrap: wrap;
             }
             .card {
                 background: white;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                width: 200px;
+                padding: 30px;
+                border-radius: 15px;
                 text-align: center;
-                transition: transform 0.3s;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                 cursor: pointer;
+                width: 200px;
+                transition: transform 0.3s;
             }
-            .card:hover {
-                transform: translateY(-5px);
-                background-color: #f0f0f0;
-            }
-            .card h3 { color: #2e7d32; } /* Un verde similar al de su botón */
+            .card:hover { transform: translateY(-10px); }
+            .card h3 { color: #2e7d32; }
+            .btn-salir { color: red !important; }
         </style>
     </head>
     <body>
-        <div style="text-align: center; margin-top: 30px;">
-            <h1>Bienvenido, Administrador</h1>
+        
+        <div class="welcome-section">
+            <h1>Bienvenido al Sistema PetSociety</h1>
             <p>Seleccione una opción para gestionar la veterinaria</p>
         </div>
 
         <div class="admin-container">
-           <div class="card" onclick="location.href='registroMascota.jsp'">
+            <div class="card" onclick="location.href='mascotas.jsp'">
                 <h3>🐾 Mascotas</h3>
-                <p>Registrar y ver pacientes</p>
+                <p>Gestionar pacientes</p>
             </div>
 
-           <div class="card" onclick="location.href='registroCita.jsp'">
+            <div class="card" onclick="location.href='registroCita.jsp'">
                 <h3>📅 Citas</h3>
                 <p>Programar atención</p>
             </div>
 
-            <div class="card" onclick="location.href='registroCita.jsp'">
+            <div class="card" onclick="location.href='inventario.jsp'">
                 <h3>💊 Inventario</h3>
                 <p>Medicamentos y stock</p>
             </div>
             
-            <div class="card" onclick="location.href='${pageContext.request.contextPath}/index.jsp'">
-                <h3 style="color: red;">🚪 Salir</h3>
+            <div class="card" onclick="location.href='index.jsp'">
+                <h3 class="btn-salir">🚪 Salir</h3>
                 <p>Cerrar sesión</p>
             </div>
         </div>
+
     </body>
 </html>
